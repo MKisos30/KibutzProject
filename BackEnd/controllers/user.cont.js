@@ -1,17 +1,15 @@
 const User = require('../models/user.model')
 const {regValidation, loginValidation} = require('../validation/user.valid')
+const bCrypt = require('bcrypt')
 
 exports.register = async(req, res) => {
     try {
         const { name, mail, password, role } = req.body
-        
         const { error } = regValidation.validate({ name, mail, password, role })
 
-        if(error) {
-            return res.send({continue: false, message: error.message})
-        }
+        const hashpass = await bCrypt.hash(password, 10)
 
-        const newUser = new User({name, mail, password, role})
+        const newUser = new User({name, mail, password: hashpass, role})
         await newUser.save()
 
         return res.send({continue: true, message: "User Saved"})
