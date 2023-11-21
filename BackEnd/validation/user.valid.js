@@ -14,9 +14,6 @@ exports.regValidation = Joi.object({
         'string.pattern.base':"Password must includ only letters and numbers",
         'string.min':"Password must be at least 6 sybmols",
         'string.max':"Passord must be maximun 10 sybmols",
-    }),
-    role: Joi.string().required().messages({
-        'string.empty':"Name can not be empty"
     })
 })
 
