@@ -1,11 +1,16 @@
-import React from 'react';
+import { FC, ReactNode } from 'react';
 
-const Form = ({children}) => {
+interface FormProps {
+    children: ReactNode
+    subFuntion: Function;
+}
+
+const Form: FC<FormProps> = ({ children, subFuntion }) => {
   return (
-  <form>
+    <form onSubmit={subFuntion}>
       {children}
-      <button>שלח</button>
-  </form>
+      <button type="submit">שלח</button>
+    </form>
   );
 };
 

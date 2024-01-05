@@ -38,13 +38,14 @@ exports.logIn = async (req, res) => {
     const userExist = await User.findOne({ mail });
 
     if (!userExist)
-      return res.send({ continue: false, message: 'Something Get Wrong' });
+      return res.send({ continue: false, message: 'Something Get Wrong - user' });
 
     const passSame = await bCrypt.compare(password, userExist.password);
 
     if (!passSame)
-      return res.send({ continue: false, message: 'Something Get Wrong' });
+      return res.send({ continue: false, message: 'Something Get Wrong - pass' });
 
+      console.log(`user in`)
       const cookieData = {userID: userExist._id}
       var token = jwt.encode(cookieData, process.env.SECRET);
       res.cookie("userInfo", token, { maxAge: 60 * 60 * 3 * 1000 })
