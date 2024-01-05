@@ -8,7 +8,7 @@ const {
 
 route
     .post('/register', register)
-    .post('/login', logIn)
+    .post('/login',  logIn)
 
 
 module.exports = route;
