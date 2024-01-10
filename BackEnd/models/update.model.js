@@ -12,4 +12,4 @@ const schemaUpdate = new Schema ({
 })
 
 const UpdateObjects = model('UpdateObjects', schemaUpdate)
-model.export = UpdateObjects;
+module.exports= UpdateObjects;

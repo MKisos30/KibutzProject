@@ -6,9 +6,12 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import Deshboad from "../Vies/deshboad";
+import DvarTorah from "../Vies/DvarTorah";
 import HomePage from "../Vies/HomePage";
 import Login from "../Vies/login";
 import Reg from "../Vies/reg";
+import ShabbatTime from "../Vies/ShabbatTime";
+import Update from "../Vies/Update";
 
 const RouterPage = () => {
   const routerMain = createBrowserRouter(
@@ -18,6 +21,9 @@ const RouterPage = () => {
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Deshboad />}>
           <Route path="reg" element={<Reg />} />
+          <Route path="dvarTorah" element={<DvarTorah />} />
+          <Route path="shabbatTime" element={<ShabbatTime />} />
+          <Route path="update" element={<Update />} />
         </Route>
       </Route>
     )

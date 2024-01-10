@@ -7,6 +7,7 @@ const inputsReg = [
   { inputId: 'userEmail', name: 'email', labelValue: 'אימייל' },
   { inputId: 'userPass', name: 'password', labelValue: 'סיסמא' },
 ];
+
 const Reg = () => {
   const userReg = async (ev: any) => {
     ev.preventDefault();
