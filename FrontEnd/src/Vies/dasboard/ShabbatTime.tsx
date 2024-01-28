@@ -4,16 +4,35 @@ import Form from '../UI/Form/Form'
 
 const inputsShabbatTime = [
   { InputId: "nameOfParasha", name: "parashaNmae", labelValue: "שם הפרשה" },
-  { InputId: "enterTime", name: "enterShabbatTime", labelValue: "כניסת שבת" },
-  { InputId: "exitTime", name: "exitShabbatTime", labelValue: "יציאת שבת" },
+  { InputId: "enterTelAviv", name: "enterTelAviv", labelValue: "כניסת שבת תל אביב" },
+  { InputId: "enterHaifa", name: "enterHaifa", labelValue: "כניסת שבת חיפה" },
+  { InputId: "enterEilat", name: "enterEilat", labelValue: "כניסת שבת אילת" },
+  { InputId: "exitTelAviv", name: "exitTelAviv", labelValue: "יציאת שבת תל אביב" },
+  { InputId: "exitrHaifa", name: "exitrHaifa", labelValue: "יציאת שבת חיפה" },
+  { InputId: "exitrEilat", name: "exitrEilat", labelValue: "יציאת שבת אילת" },
 ]
 
-interface Shbbat {
-  parasha: string, shabbatEnter: string, shabbatExit: string,
+export interface Shbbat {
+  parasha: string,
+  enterTelAviv: string,
+  enterHaifa: string,
+  enterEilat: string,
+  exitTelAviv: string,
+  exitrHaifa: string,
+  exitrEilat: string
 }
 
 const ShabbatTime: FC = () => {
-  const [info, setInfo] = useState<Shbbat>({parasha:"", shabbatEnter:"", shabbatExit:""})
+  const [info, setInfo] = useState<Shbbat>({
+    parasha:"", 
+    enterTelAviv:"", 
+    enterHaifa:"", 
+    enterEilat:"", 
+    exitTelAviv:"",
+    exitrHaifa:"",
+    exitrEilat:""
+  })
+
   const [message, setMessage] = useState("")
 
   const getShabbatTime = async () => {
@@ -21,7 +40,16 @@ const ShabbatTime: FC = () => {
     console.log(data)
     console.log(data.shabbat[0])
 
-    if(data.continue) return setInfo({parasha: data.shabbat[0].nameOfParasha, shabbatEnter: data.shabbat[0].enterTime, shabbatExit: data.shabbat[0].exitTime })
+    if(data.continue) return setInfo({
+      parasha: data.shabbat[0].nameOfParasha, 
+      enterTelAviv: data.shabbat[0].enterTelAviv, 
+      enterHaifa: data.shabbat[0].enterHaifa,
+      enterEilat: data.shabbat[0].enterEilat,
+      exitTelAviv: data.shabbat[0].exitTelAviv,
+      exitrHaifa: data.shabbat[0].exitrHaifa,
+      exitrEilat: data.shabbat[0].exitrEilat,
+    })
+
     if(!data.continue) return setMessage(data.message)
     //setInfo(data)
     //setInfo()
@@ -35,16 +63,22 @@ const ShabbatTime: FC = () => {
   const shabbatTimeUpdate = async (ev: any) => {
     ev.preventDefault();
 
+    // enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat
     const parasha = ev.target.elements.parashaNmae.value;
-    const shabbatEnter = ev.target.elements.enterShabbatTime.value;
-    const shabbatExit = ev.target.elements.exitShabbatTime.value;
+    const enterTelAviv = ev.target.elements.enterTelAviv.value;
+    const enterHaifa = ev.target.elements.enterHaifa.value;
+    const enterEilat = ev.target.elements.enterEilat.value;
+    const exitTelAviv = ev.target.elements.exitTelAviv.value;
+    const exitrHaifa = ev.target.elements.exitrHaifa.value;
+    const exitrEilat = ev.target.elements.exitrEilat.value;
 
-    console.log(parasha, shabbatEnter, shabbatExit)
 
-    const { data  } = await axios.post('http://localhost:8787/deshboard/shabbatTime', {parasha, shabbatEnter, shabbatExit})
+    console.log(parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat)
+
+    const { data  } = await axios.post('http://localhost:8787/deshboard/shabbatTime', {parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat})
     // const {continue, message} = data
 
-    if(data.continue) return setInfo({parasha, shabbatEnter, shabbatExit})
+    if(data.continue) return setInfo({parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat})
     if(!data.continue) return setMessage(data.message)
   }
   
@@ -59,11 +93,14 @@ const ShabbatTime: FC = () => {
         ))}
       </Form>
 
-          {/* להוסיף חלונית מידע במידה ואין מידע על זמנים */}
       <p>{message.length > 0 ? message : null}</p>
-      <h2>{info.parasha}</h2>
-      <h2>{info.shabbatEnter}</h2> {/* tel aviv, jerusalem, haifa */}
-      <h2>{info.shabbatExit}</h2> {/* tel aviv, jerusalem, haifa */}
+      <h2>פרשה: {info.parasha}</h2>
+      <h2>כניסת שבת תל אביב: {info.enterTelAviv}</h2>
+      <h2>כניסת שבת חיפה: {info.enterHaifa}</h2> 
+      <h2>כניסת שבת אילת: {info.enterEilat}</h2> 
+      <h2>יציאת שבת תל אביב: {info.exitTelAviv}</h2> 
+      <h2>יציאת שבת חיפה: {info.exitrHaifa}</h2> 
+      <h2>יציאת שבת אילת: {info.exitrEilat}</h2> 
     </div>
   )
 }

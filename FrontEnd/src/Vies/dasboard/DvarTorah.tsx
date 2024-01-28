@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Form from '../UI/Form/Form'
 
-interface DvarTorahInfo {
+export interface DvarTorahInfo {
   title: string,
   dvarTorahText: string
 }

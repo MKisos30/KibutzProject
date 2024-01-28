@@ -6,7 +6,8 @@ const {
     getDvarTorah,
     shabbat,
     update, 
-    getShabbatTime
+    getShabbatTime,
+    davningTime
 } = require('../controllers/deshboard.cont')
 
 route
@@ -15,5 +16,7 @@ route
    .post('/shabbatTime', shabbat)
    .get('/getShabbatTime', getShabbatTime)
    .post('/update', update)
+   .post('/davningTime', davningTime)
+   // post לעידכוים
 
 module.exports = route;

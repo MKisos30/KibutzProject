@@ -1,6 +1,7 @@
 const DvarTorah = require('../models/dvarTorah.model');
 const Shabbat = require('../models/shabbat.model');
 const Update = require('../models/update.model');
+const DavningTime = require('../models/davningTime')
 
 exports.postDvarTorah = async (req, res) => {
   try {
@@ -29,12 +30,12 @@ exports.getDvarTorah = async (req, res) => {
 
 exports.shabbat = async (req, res) => {
   try {
-    const { parasha, shabbatEnter, shabbatExit } = req.body;
+    const { parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat } = req.body;
     const newDetailsTime = new Shabbat({
       nameOfParasha: parasha,
-      enterTime: shabbatEnter,
-      exitTime: shabbatExit,
+      enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat
     });
+    
     await newDetailsTime.save();
     return res.send({ continue: true, message: 'Saved' });
   } catch (error) {
@@ -42,6 +43,8 @@ exports.shabbat = async (req, res) => {
     return res.send({ continue: false, message: error });
   }
 };
+
+// update shabbat time, name of parasha, text dvar torah
 
 exports.getShabbatTime = async (req, res) => {
   try {
@@ -66,3 +69,17 @@ exports.update = async (req, res) => {
     return res.send({ continue: false, message: error });
   }
 };
+
+exports.davningTime = async (req, res) => {
+  try {
+    const {title, minchaErevShabbat, shacharit, mincha, arvit } = req.body;
+    const newDavningTime = new DavningTime({ title, minchaErevShabbat, shacharit, mincha, arvit })
+
+    await newDavningTime.save()
+    return res.send({ continue: true, message: 'Saved' })
+
+  } catch (error) {
+    console.log(`server Error: ${error}`);
+    return res.send({ continue: false, message: error });
+  }
+}
