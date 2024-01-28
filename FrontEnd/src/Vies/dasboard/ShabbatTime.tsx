@@ -1,6 +1,6 @@
-import { FC, useState } from 'react'
-import axios from '../../node_modules/axios/index'
-import Form from './UI/Form/Form'
+import { FC, useEffect, useState } from 'react'
+import axios from 'axios'
+import Form from '../UI/Form/Form'
 
 const inputsShabbatTime = [
   { InputId: "nameOfParasha", name: "parashaNmae", labelValue: "שם הפרשה" },
@@ -8,15 +8,29 @@ const inputsShabbatTime = [
   { InputId: "exitTime", name: "exitShabbatTime", labelValue: "יציאת שבת" },
 ]
 
+interface Shbbat {
+  parasha: string, shabbatEnter: string, shabbatExit: string,
+}
+
 const ShabbatTime: FC = () => {
-  const [info, setInfo] = useState({})
+  const [info, setInfo] = useState<Shbbat>({parasha:"", shabbatEnter:"", shabbatExit:""})
   const [message, setMessage] = useState("")
 
   const getShabbatTime = async () => {
-    const {data} = await axios.get("")
+    const {data} = await axios.get("http://localhost:8787/deshboard/getShabbatTime")
     console.log(data)
+    console.log(data.shabbat[0])
+
+    if(data.continue) return setInfo({parasha: data.shabbat[0].nameOfParasha, shabbatEnter: data.shabbat[0].enterTime, shabbatExit: data.shabbat[0].exitTime })
+    if(!data.continue) return setMessage(data.message)
     //setInfo(data)
+    //setInfo()
   }
+
+  useEffect(()=>{
+    getShabbatTime()
+  },[])
+
 
   const shabbatTimeUpdate = async (ev: any) => {
     ev.preventDefault();
@@ -45,10 +59,11 @@ const ShabbatTime: FC = () => {
         ))}
       </Form>
 
+          {/* להוסיף חלונית מידע במידה ואין מידע על זמנים */}
       <p>{message.length > 0 ? message : null}</p>
       <h2>{info.parasha}</h2>
-      <h2>{info.shabbatEnter}</h2>
-      <h2>{info.shabbatExit}</h2>
+      <h2>{info.shabbatEnter}</h2> {/* tel aviv, jerusalem, haifa */}
+      <h2>{info.shabbatExit}</h2> {/* tel aviv, jerusalem, haifa */}
     </div>
   )
 }

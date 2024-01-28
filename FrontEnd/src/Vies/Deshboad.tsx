@@ -10,8 +10,7 @@ const Deshboad = () => {
   // }
 
   return (
-    <div>
-        Deshboad 
+    <div> 
         <Outlet />
         <p>
 

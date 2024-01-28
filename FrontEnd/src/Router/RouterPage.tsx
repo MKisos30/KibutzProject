@@ -5,13 +5,17 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "../App";
+import DvarTorah from "../Vies/dasboard/DvarTorah";
+import Reg from "../Vies/dasboard/Reg";
+import ShabbatTime from "../Vies/dasboard/ShabbatTime";
+import Update from "../Vies/dasboard/Update";
 import Deshboad from "../Vies/deshboad";
-import DvarTorah from "../Vies/DvarTorah";
+// import DvarTorah from "../Vies/dasboard/DvarTorah";
 import HomePage from "../Vies/HomePage";
 import Login from "../Vies/login";
-import Reg from "../Vies/reg";
-import ShabbatTime from "../Vies/ShabbatTime";
-import Update from "../Vies/Update";
+// import Reg from "../Vies/dasboard/Reg";
+// import ShabbatTime from "../Vies/dasboard/ShabbatTime";
+// import Update from "../Vies/dasboard/Update";
 
 const RouterPage = () => {
   const routerMain = createBrowserRouter(

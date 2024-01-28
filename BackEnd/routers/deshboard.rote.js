@@ -2,14 +2,18 @@ const { Router } = require('express')
 const route = Router()
 
 const {
-    dvarTorah,
+    postDvarTorah,
+    getDvarTorah,
     shabbat,
-    update
+    update, 
+    getShabbatTime
 } = require('../controllers/deshboard.cont')
 
 route
-   .post('/dvarTorah', dvarTorah)
+   .post('/dvarTorah', postDvarTorah)
+   .get('/getDvarTorah', getDvarTorah)
    .post('/shabbatTime', shabbat)
+   .get('/getShabbatTime', getShabbatTime)
    .post('/update', update)
 
 module.exports = route;

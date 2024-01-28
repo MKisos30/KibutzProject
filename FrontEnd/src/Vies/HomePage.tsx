@@ -24,6 +24,8 @@ const HomePage = () => {
             <h3>עידכונים:</h3>
             <p></p>
         </div>
+
+        {/* do a new component and add the time there */}
         <div>
             <h4>זמני כניסה שבת:</h4>
             <p>אילת: 16:15</p>
@@ -37,6 +39,8 @@ const HomePage = () => {
             <p>מנחה: 16:15</p>
             <p>ערבית: 16:15</p>
         </div>
+
+        
         <div>
             <h3>עידכונים:</h3>
             <p></p>

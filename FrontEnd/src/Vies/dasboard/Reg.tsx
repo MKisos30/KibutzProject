@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from '../../node_modules/axios/index';
-import Form from './UI/Form/Form';
+import axios from '../../../node_modules/axios/index';
+import Form from '../UI/Form/Form';
 
 const inputsReg = [
   { inputId: 'userName', name: 'name', labelValue: 'שם משתמש' },
