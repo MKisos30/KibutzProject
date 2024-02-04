@@ -13,17 +13,16 @@ const HomePage = () => {
 
         <DavningTime />
 
-        <div>
+      <div>
             <h3>עידכונים:</h3>
             <p></p>
-    </div>
+      </div>
 
-        
-        
-        <div>
+      <div>
             <h3>עידכונים:</h3>
             <p></p>
-        </div>
+      </div>
+      
     </div>
   )
 }
