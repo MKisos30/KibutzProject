@@ -56,7 +56,7 @@ exports.getShabbatTime = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.updateDvarTorah = async (req, res) => { //post controller of ....
   try {
     const { text } = req.body;
 
@@ -70,7 +70,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.davningTime = async (req, res) => {
+exports.postDavningTime = async (req, res) => { //post controller of davningTime
   try {
     const {title, minchaErevShabbat, shacharit, mincha, arvit } = req.body;
     const newDavningTime = new DavningTime({ title, minchaErevShabbat, shacharit, mincha, arvit })
@@ -78,6 +78,40 @@ exports.davningTime = async (req, res) => {
     await newDavningTime.save()
     return res.send({ continue: true, message: 'Saved' })
 
+  } catch (error) {
+    console.log(`server Error: ${error}`);
+    return res.send({ continue: false, message: error });
+  }
+}
+
+exports.getDavningTime = async (req, res) => {
+  try {
+    const davning = await DavningTime.find().sort({_id:-1}).limit(1);
+    return res.send({ continue: true, davning})
+  } catch (error) {
+    console.log(`server Error: ${error}`);
+    return res.send({ continue: false, message: error });
+  }
+}
+
+exports.postKibotzUpdate = async (req, res) => {
+  try {
+    const { time, text } = req.body;
+    const newKibutzUpdate = new Update({ time, text })
+
+    await newKibutzUpdate.save();
+    return res.send({ continue: true, message: 'Saved'})
+
+  } catch (error) {
+    console.log(`server Error: ${error}`);
+    return res.send({ continue: false, message: error });
+  }
+}
+
+exports.getKibotzUpdate = async (req, res) => {
+  try {
+    const newsUpdates = await Update.find();
+    return res.send({ continue: true, newsUpdates })
   } catch (error) {
     console.log(`server Error: ${error}`);
     return res.send({ continue: false, message: error });

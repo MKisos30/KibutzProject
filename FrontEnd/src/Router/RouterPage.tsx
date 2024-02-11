@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "../App";
+import DavningTimeDash from "../Vies/dasboard/DavningTimeDash";
 import DvarTorah from "../Vies/dasboard/DvarTorah";
 import Reg from "../Vies/dasboard/Reg";
 import ShabbatTime from "../Vies/dasboard/ShabbatTime";
@@ -21,13 +22,14 @@ const RouterPage = () => {
   const routerMain = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<App/>}>
-        <Route index element={<  HomePage />}/>
+        <Route index element={<HomePage />}/>
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Deshboad />}>
           <Route path="reg" element={<Reg />} />
           <Route path="dvarTorah" element={<DvarTorah />} />
           <Route path="shabbatTime" element={<ShabbatTime />} />
           <Route path="update" element={<Update />} />
+          <Route path="davningTime" element={<DavningTimeDash />} />
         </Route>
       </Route>
     )

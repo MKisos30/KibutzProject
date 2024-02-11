@@ -20,6 +20,9 @@ export interface Davning {
 }
 
 const DavningTimeDash: FC = () => {
+
+  const [message, setMessage] = useState("")
+
   const [time, setTime] = useState<Davning>({
     title:"",
     minchaErevShabbat:"",
@@ -28,23 +31,39 @@ const DavningTimeDash: FC = () => {
     arvit:""
   })
 
-  const [message, setMessage] = useState("")
+
+  const postDavningTime = async (ev: any) => {
+    ev.preventDefault();
+
+    const title = ev.target.elements.title.value;
+    const minchaErevShabbat = ev.target.elements.minchaErevShabbat.value;
+    const shacharit = ev.target.elements.shacharit.value;
+    const mincha = ev.target.elements.mincha.value;
+    const arvit = ev.target.elements.arvit.value;
+
+    console.log(title, minchaErevShabbat, shacharit, mincha, arvit)
+
+    const { data } = await axios.post('http://localhost:8787/deshboard/davningTime', {title, minchaErevShabbat, shacharit, mincha, arvit})
+
+    if (data.continue) return setTime({title, minchaErevShabbat, shacharit, mincha, arvit})
+    if (!data.continue) return setMessage(data.message)
+  }
+
 
   const getDavningTime = async () => {
-    const { data } = await axios.get('http://localhost:8787/deshboard/davningTime')
+    const { data } = await axios.get('http://localhost:8787/deshboard/getDavningTime')
     console.log(data)
 
     if(data.continue) return setTime({
-      title: data.davningTime[0].title, 
-      minchaErevShabbat: data.davningTime[0].minchaErevShabbat,
-      shacharit: data.davningTime[0].shacharit,
-      mincha: data.davningTime[0].mincha,
-      arvit: data.davningTime[0].arvit,
+      title: data.davning[0].title, 
+      minchaErevShabbat: data.davning[0].minchaErevShabbat,
+      shacharit: data.davning[0].shacharit,
+      mincha: data.davning[0].mincha,
+      arvit: data.davning[0].arvit,
   
     })
 
     if (!data.continue) return setMessage(data.message)
-
   }
 
   useEffect(() => {
@@ -52,17 +71,17 @@ const DavningTimeDash: FC = () => {
   }, [])
 
 
-
-
   return (
     <div>
-        <Form subFuntion={getDavningTime}>
-            {inputsDavningTime.map((inp, i) => {
+        <Form subFuntion={postDavningTime}>
+            {inputsDavningTime.map((inp, i) => (
+              
                 <div key={i}>
                 <label htmlFor={inp.InputId}>{inp.labelValue}</label>
                 <input id={inp.InputId} type="text" name={inp.name} /> 
                 </div>
-            })
+              
+            ))
             }
         </Form>
       
@@ -77,8 +96,5 @@ const DavningTimeDash: FC = () => {
 }
 
 export default DavningTimeDash
-
-
-   
 
 
