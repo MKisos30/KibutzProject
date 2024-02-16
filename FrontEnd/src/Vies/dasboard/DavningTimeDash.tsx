@@ -78,7 +78,7 @@ const DavningTimeDash: FC = () => {
               
                 <div key={i}>
                 <label htmlFor={inp.InputId}>{inp.labelValue}</label>
-                <input id={inp.InputId} type="text" name={inp.name} /> 
+                <input id={inp.InputId} type={inp.name == "title" ? "text":"time"} name={inp.name} /> 
                 </div>
               
             ))

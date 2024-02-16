@@ -3,12 +3,14 @@ const route = Router()
 
 const {
     register,
-    logIn
+    logIn,
+    checkCookie
 } = require('../controllers/user.cont')
 
 route
     .post('/register', register)
     .post('/login',  logIn)
+    .get('/check-cookies', checkCookie)
 
 
 module.exports = route;

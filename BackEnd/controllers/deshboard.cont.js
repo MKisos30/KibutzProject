@@ -11,7 +11,7 @@ exports.postDvarTorah = async (req, res) => {
     const newDvarTorah = new DvarTorah({ title, dvarTorahText });
     await newDvarTorah.save();
 
-    return res.send({ continue: true, message: 'Saved' });
+    return res.send({ continue: true, message: 'נשמר' });
   } catch (error) {
     console.log(`server Error: ${error}`);
     return res.send({ continue: false, message: error });
@@ -37,7 +37,7 @@ exports.shabbat = async (req, res) => {
     });
     
     await newDetailsTime.save();
-    return res.send({ continue: true, message: 'Saved' });
+    return res.send({ continue: true, message: 'נשמר' });
   } catch (error) {
     console.log(`server Error: ${error}`);
     return res.send({ continue: false, message: error });
@@ -63,7 +63,7 @@ exports.updateDvarTorah = async (req, res) => { //post controller of ....
     const newUpdate = new Update({ text });
     await newUpdate.save();
 
-    return res.send({ continue: true, message: 'Saved' });
+    return res.send({ continue: true, message: 'נשמר' });
   } catch (error) {
     console.log(`server Error: ${error}`);
     return res.send({ continue: false, message: error });
@@ -76,7 +76,7 @@ exports.postDavningTime = async (req, res) => { //post controller of davningTime
     const newDavningTime = new DavningTime({ title, minchaErevShabbat, shacharit, mincha, arvit })
 
     await newDavningTime.save()
-    return res.send({ continue: true, message: 'Saved' })
+    return res.send({ continue: true, message: 'נשמר' })
 
   } catch (error) {
     console.log(`server Error: ${error}`);
@@ -100,7 +100,7 @@ exports.postKibotzUpdate = async (req, res) => {
     const newKibutzUpdate = new Update({ time, text })
 
     await newKibutzUpdate.save();
-    return res.send({ continue: true, message: 'Saved', newKibutzUpdate})
+    return res.send({ continue: true, message: 'נשמר', newKibutzUpdate})
 
   } catch (error) {
     console.log(`server Error: ${error}`);

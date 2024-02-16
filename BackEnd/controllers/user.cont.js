@@ -13,14 +13,14 @@ exports.register = async (req, res) => {
 
     const userExist = await User.findOne({ mail });
 
-    if (userExist) return res.send({ continue: false, message: 'User Exist' });
+    if (userExist) return res.send({ continue: false, message: 'משתמש כבר קיים' });
 
     const hashpass = await bCrypt.hash(password, 10);
 
     const newUser = new User({ name, mail, password: hashpass, role: 'admin' });
     await newUser.save();
 
-    return res.send({ continue: true, message: 'User Saved' });
+    return res.send({ continue: true, message: 'המשתמש החדש נשמר' });
   } catch (error) {
     console.log(`Server Error: ${error}`);
     return res.send({ continue: false, message: error });
@@ -38,21 +38,28 @@ exports.logIn = async (req, res) => {
     const userExist = await User.findOne({ mail });
 
     if (!userExist)
-      return res.send({ continue: false, message: 'Something Get Wrong - user' });
+      return res.send({ continue: false, message: 'משהו לא תקין - נסה שנית' });
 
     const passSame = await bCrypt.compare(password, userExist.password);
 
     if (!passSame)
-      return res.send({ continue: false, message: 'Something Get Wrong - pass' });
+      return res.send({ continue: false, message: 'משהו לא תקין - נסה שנית' });
 
       console.log(`user in`)
       const cookieData = {userID: userExist._id}
-      var token = jwt.encode(cookieData, process.env.SECRET);
-      res.cookie("userInfo", token, { maxAge: 60 * 60 * 3 * 1000 })
+      console.log(userExist._id)
+      const token = jwt.encode(cookieData, process.env.SECRET);
+      console.log(token)
+      res.cookie("userInfo", token, { maxAge: 60 * 60 * 3 * 1000, httpOnly: true })
 
-    return res.send({ continue: true, message: 'Succsesfull' });
+    res.send({ continue: true });
   } catch (error) {
     console.log(`Server Error: ${error}`);
     return res.send({ continue: false, message: error });
   }
 };
+
+exports.checkCookie = async (req, res) => {
+  const cooc= req.cookies
+  console.log(cooc)
+}

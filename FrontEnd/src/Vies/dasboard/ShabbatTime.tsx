@@ -88,7 +88,7 @@ const ShabbatTime: FC = () => {
         {inputsShabbatTime.map((inp, i) => (
                    <div key={i}>
             <label htmlFor={inp.InputId}>{inp.labelValue}</label>
-            <input id={inp.InputId} type="text" name={inp.name} />
+            <input id={inp.InputId} type={inp.name == "parashaNmae" ? "text" : "time"} name={inp.name} />
           </div>
         ))}
       </Form>

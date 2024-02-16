@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import axios from '../../../node_modules/axios/index';
 import Form from '../UI/Form/Form';
 
@@ -9,6 +9,7 @@ const inputsReg = [
 ];
 
 const Reg = () => {
+  const [message, setMessage] = useState<string>()
   const userReg = async (ev: any) => {
     ev.preventDefault();
 
@@ -16,19 +17,19 @@ const Reg = () => {
     const mail = ev.target.elements.userEmail.value
     const password = ev.target.elements.userPass.value
 
-    console.log(name, mail, password)
-
     const {data} = await axios.post('http://localhost:8787/auth/register', {name, mail, password})
     console.log(data)
+    return setMessage(data.message)
   }
 
   return (
     <div>
+      <p>{message}</p>
       <Form subFuntion={userReg}>
         {inputsReg.map((inp, i) => (
           <div key={i}>
             <label htmlFor={inp.inputId}>{inp.labelValue}</label>
-            <input id={inp.inputId} type="text" name={inp.name} />
+            <input id={inp.inputId} type={inp.name === "password"? "password" : "text"} name={inp.name} />
           </div>
         ))}
       </Form>
