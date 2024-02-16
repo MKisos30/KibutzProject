@@ -1,30 +1,20 @@
-import React from 'react'
-import DavningTime from './Components/DavningTime'
-import DvarTorahText from './Components/DvarTorahText'
-import ShabbatTime from './Components/ShabbatTime'
+import React from 'react';
+import DavningTime from './Components/DavningTime';
+import DvarTorahText from './Components/DvarTorahText';
+import ShabbatTime from './Components/ShabbatTime';
+import Update from './Components/Update';
 
 const HomePage = () => {
   return (
     <div>
+      <ShabbatTime />
 
-        <ShabbatTime />
+      <DvarTorahText />
 
-        <DvarTorahText />    
-
-        <DavningTime />
-
-      <div>
-            <h3>עידכונים:</h3>
-            <p></p>
-      </div>
-
-      <div>
-            <h3>עידכונים:</h3>
-            <p></p>
-      </div>
-      
+      <DavningTime />
+      <Update />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

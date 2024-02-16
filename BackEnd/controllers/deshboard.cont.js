@@ -100,7 +100,7 @@ exports.postKibotzUpdate = async (req, res) => {
     const newKibutzUpdate = new Update({ time, text })
 
     await newKibutzUpdate.save();
-    return res.send({ continue: true, message: 'Saved'})
+    return res.send({ continue: true, message: 'Saved', newKibutzUpdate})
 
   } catch (error) {
     console.log(`server Error: ${error}`);
