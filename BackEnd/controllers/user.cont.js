@@ -3,7 +3,6 @@ const { regValidation, loginValidation } = require('../validation/user.valid');
 const bCrypt = require('bcrypt');
 const jwt = require('jwt-simple');
 
-
 exports.register = async (req, res) => {
   try {
     const { name, mail, password } = req.body;
@@ -13,7 +12,8 @@ exports.register = async (req, res) => {
 
     const userExist = await User.findOne({ mail });
 
-    if (userExist) return res.send({ continue: false, message: 'משתמש כבר קיים' });
+    if (userExist)
+      return res.send({ continue: false, message: 'משתמש כבר קיים' });
 
     const hashpass = await bCrypt.hash(password, 10);
 
@@ -45,21 +45,11 @@ exports.logIn = async (req, res) => {
     if (!passSame)
       return res.send({ continue: false, message: 'משהו לא תקין - נסה שנית' });
 
-      console.log(`user in`)
-      const cookieData = {userID: userExist._id}
-      console.log(userExist._id)
-      const token = jwt.encode(cookieData, process.env.SECRET);
-      console.log(token)
-      res.cookie("userInfo", token, { maxAge: 60 * 60 * 3 * 1000, httpOnly: true })
-
-    res.send({ continue: true });
+    const tokenData = { userID: userExist._id };
+    const token = jwt.encode(tokenData, process.env.SECRET);
+    res.send({ continue: true, token });
   } catch (error) {
     console.log(`Server Error: ${error}`);
     return res.send({ continue: false, message: error });
   }
 };
-
-exports.checkCookie = async (req, res) => {
-  const cooc= req.cookies
-  console.log(cooc)
-}

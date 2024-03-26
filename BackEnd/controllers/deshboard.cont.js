@@ -11,7 +11,7 @@ exports.postDvarTorah = async (req, res) => {
     const newDvarTorah = new DvarTorah({ title, dvarTorahText });
     await newDvarTorah.save();
 
-    return res.send({ continue: true, message: 'נשמר' });
+    return res.send({ continue: true, message: 'נשמר', newDvarTorah });
   } catch (error) {
     console.log(`server Error: ${error}`);
     return res.send({ continue: false, message: error });
@@ -27,6 +27,17 @@ exports.getDvarTorah = async (req, res) => {
     return res.send({ continue: false, message: error });
   }
 };
+
+exports.updateDvarTora = async (req, res) => {
+  try {
+    const {id, title, dvarTorahText} = req.body
+    await DvarTorah.findByIdAndUpdate(id, {title, dvarTorahText})
+    return res.send({continue: true, message: "המידע עודכן"})
+  } catch (error) {
+    console.log(`server Error: ${error}`);
+    return res.send({ continue: false, message: error });
+  }
+}
 
 exports.shabbat = async (req, res) => {
   try {

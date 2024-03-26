@@ -35,6 +35,9 @@ const DavningTimeDash: FC = () => {
   const postDavningTime = async (ev: any) => {
     ev.preventDefault();
 
+    const token = localStorage.getItem('token')
+    console.log(token)
+
     const title = ev.target.elements.title.value;
     const minchaErevShabbat = ev.target.elements.minchaErevShabbat.value;
     const shacharit = ev.target.elements.shacharit.value;
@@ -43,7 +46,7 @@ const DavningTimeDash: FC = () => {
 
     console.log(title, minchaErevShabbat, shacharit, mincha, arvit)
 
-    const { data } = await axios.post('http://localhost:8787/deshboard/davningTime', {title, minchaErevShabbat, shacharit, mincha, arvit})
+    const { data } = await axios.post(`http://localhost:8787/deshboard/davningTime?token=${token}`, {title, minchaErevShabbat, shacharit, mincha, arvit})
 
     if (data.continue) return setTime({title, minchaErevShabbat, shacharit, mincha, arvit})
     if (!data.continue) return setMessage(data.message)
@@ -51,7 +54,8 @@ const DavningTimeDash: FC = () => {
 
 
   const getDavningTime = async () => {
-    const { data } = await axios.get('http://localhost:8787/deshboard/getDavningTime')
+  
+    const { data } = await axios.get(`http://localhost:8787/deshboard/getDavningTime?token=${token}`)
     console.log(data)
 
     if(data.continue) return setTime({

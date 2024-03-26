@@ -13,11 +13,14 @@ const Reg = () => {
   const userReg = async (ev: any) => {
     ev.preventDefault();
 
+    const token = localStorage.getItem('token')
+    console.log(token)
+
     const name = ev.target.elements.userName.value
     const mail = ev.target.elements.userEmail.value
     const password = ev.target.elements.userPass.value
 
-    const {data} = await axios.post('http://localhost:8787/auth/register', {name, mail, password})
+    const {data} = await axios.post(`http://localhost:8787/auth/register?token=${token}`, {name, mail, password})
     console.log(data)
     return setMessage(data.message)
   }

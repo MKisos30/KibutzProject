@@ -6,6 +6,7 @@ require('dotenv').config()
 const mongoose = require('./ConectDB')
 const cookieParser = require('cookie-parser')
 
+
 const whitelist = ['http://127.0.0.1:5173']
 const corsOptions = {
     origin: function (origin, callback) {

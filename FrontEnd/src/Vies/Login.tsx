@@ -20,6 +20,7 @@ const Login = () => {
     console.log(data)
 
     if(data.continue) {
+      localStorage.setItem("token", data.token)
       return navigate("/dashboard/dvarTorah", {replace: true})
     }
   };

@@ -28,12 +28,15 @@ const Update = () => {
   const updateInformation = async (ev: any) => {
     ev.preventDefault();
 
+    const token = localStorage.getItem('token')
+    console.log(token)
+
     const time = ev.target.elements.time.value
     const text = ev.target.elements.text.value
 
     console.log( time, text )
 
-    const { data } = await axios.post('http://localhost:8787/deshboard/postKibotzUpdate', { time, text })
+    const { data } = await axios.post(`http://localhost:8787/deshboard/postKibotzUpdate?token=${token}`, { time, text })
     console.log(data)
 
     return setKibutzUpdate([...kibutzUpdate, data.newKibutzUpdate])

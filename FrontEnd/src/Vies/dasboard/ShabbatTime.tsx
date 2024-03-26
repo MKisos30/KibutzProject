@@ -63,6 +63,9 @@ const ShabbatTime: FC = () => {
   const shabbatTimeUpdate = async (ev: any) => {
     ev.preventDefault();
 
+    const token = localStorage.getItem('token')
+    console.log(token)
+
     // enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat
     const parasha = ev.target.elements.parashaNmae.value;
     const enterTelAviv = ev.target.elements.enterTelAviv.value;
@@ -75,7 +78,7 @@ const ShabbatTime: FC = () => {
 
     console.log(parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat)
 
-    const { data  } = await axios.post('http://localhost:8787/deshboard/shabbatTime', {parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat})
+    const { data  } = await axios.post(`http://localhost:8787/deshboard/shabbatTime?token=${token}`, {parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat})
     // const {continue, message} = data
 
     if(data.continue) return setInfo({parasha, enterTelAviv, enterHaifa, enterEilat, exitTelAviv, exitrHaifa, exitrEilat})

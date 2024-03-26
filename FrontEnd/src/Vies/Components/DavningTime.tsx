@@ -15,7 +15,8 @@ const DavningTime = () => {
   const [message, setMessage] = useState("")
 
   const getDavningTime = async () => {
-    const {data} = await axios.get("http://localhost:8787/deshboard/getDavningTime")
+
+    const {data} = await axios.get(`http://localhost:8787/deshboard/getDavningTime`)
     console.log(data)
 
     if(data.continue) return setInfo({
