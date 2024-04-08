@@ -43,15 +43,15 @@ const ShabbatTime = () => {
 
 
   return (
-    <div>
-      <h2>שם הפרשה: {info.parasha}</h2>
-      <div>
+    <div className="shabbatDiv">
+      <h2 className="shabbatDiv__line">שם הפרשה: {info.parasha}</h2>
+      <div className="shabbatDiv__enter">
             <h4>זמני כניסה שבת:</h4>
             <p>תל אביב: {info.enterTelAviv}</p>
             <p>חיפה: {info.enterHaifa}</p>
             <p>אילת: {info.enterEilat}</p>
       </div>
-      <div>
+      <div className="shabbatDiv__exit">
             <h4>זמני יציאת שבת:</h4>
             <p>תל אביב: {info.exitTelAviv}</p>
             <p>חיפה: {info.exitrHaifa}</p>

@@ -10,8 +10,8 @@ const NavBar = () => {
     }
 
   return (
-    <div>
-      <nav>
+    <div className="navBarDiv">
+      <nav className="navBarDiv__nav">
         <Link to="/dashboard/reg">
           הרשמה חדשה
         </Link>

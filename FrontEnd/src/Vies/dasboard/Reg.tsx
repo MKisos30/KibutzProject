@@ -26,9 +26,9 @@ const Reg = () => {
   }
 
   return (
-    <div>
+    <div className="registerDiv">
       <p>{message}</p>
-      <Form subFuntion={userReg}>
+      <Form className="registerDiv__form" subFuntion={userReg}>
         {inputsReg.map((inp, i) => (
           <div key={i}>
             <label htmlFor={inp.inputId}>{inp.labelValue}</label>

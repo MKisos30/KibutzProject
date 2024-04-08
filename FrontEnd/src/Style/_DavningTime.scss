@@ -1,0 +1,21 @@
+.davningTimeDiv {
+    background-color: #d57713dd;
+    border: orangered 0.5px solid;
+    width: 50%;
+    height: 70%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 5%;
+
+    &__parashaName {
+        margin: 2%;
+        font-size: 1.5rem;
+        // font-size: clamp(20px,2vw ,40px);
+       // font-size: calc(1rem + 5vw);
+    }
+
+    &__time {
+        margin: 5%;
+        font-size: 0.8rem;
+    }
+}

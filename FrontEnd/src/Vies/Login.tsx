@@ -26,16 +26,16 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={userLoginFunc}>
+    <div className="loginDiv">
+      <h1>כניסה לאתר</h1>
+      <form className="loginDiv__form" onSubmit={userLoginFunc}>
         {inputsLog.map((inp, i) => (
           <div key={i}>
             <label htmlFor={inp.inputId}>{inp.labelValue}</label>
             <input id={inp.inputId} type={inp.name === "password"? "password" : "text"} name={inp.name} />
           </div>
         ))}
-        <button type="submit">Login</button>
+        <button type="submit">כניסה</button>
       </form>
     </div>
   );

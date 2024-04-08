@@ -31,9 +31,9 @@ const DvarTorahText = () => {
   }, []);
 
   return (
-    <div>
-      <h3>כותרת: {text.title}</h3>
-      <p>{text.dvarTorahText}</p>
+    <div className="dvarTorahDiv">
+      <h3 className="dvarTorahDiv__line">כותרת: {text.title}</h3>
+      <p className="dvarTorahDiv__text">{text.dvarTorahText}</p>
     </div>
   );
 };

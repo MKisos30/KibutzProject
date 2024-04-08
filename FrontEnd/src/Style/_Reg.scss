@@ -1,0 +1,20 @@
+.registerDiv {
+    // background-color: rgb(184, 92, 11);
+    background-color: rgb(238, 174, 95);
+    width: 90%;
+    margin: 0 auto;
+    padding: 2%;
+    margin-top: 5%;
+
+    &__form {
+        margin: 2%;
+    }
+
+    input {
+        margin: 1%;
+    }
+    
+    button {
+        margin-top: 2%;
+    }
+}

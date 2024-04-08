@@ -37,12 +37,12 @@ const DavningTime = () => {
 
 
   return (
-    <div>
-      <h2>שם הפרשה: {info.title}</h2>
-      <p>מנחה ערב שבת: {info.minchaErevShabbat}</p>
-      <p>שחרית: {info.shacharit}</p>
-      <p>מנחה: {info.mincha}</p>
-      <p>ערבית: {info.arvit}</p>
+    <div className="davningTimeDiv">
+      <h2 className="davningTimeDiv__parashaName">שם הפרשה: {info.title}</h2>
+      <p className="davningTimeDiv__time">מנחה ערב שבת: {info.minchaErevShabbat}</p>
+      <p className="davningTimeDiv__time">שחרית: {info.shacharit}</p>
+      <p className="davningTimeDiv__time">מנחה: {info.mincha}</p>
+      <p className="davningTimeDiv__time">ערבית: {info.arvit}</p>
     </div>
   )
 }
